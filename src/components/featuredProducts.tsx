@@ -71,7 +71,7 @@ const FeaturedProducts = () => {
       </div>
       {/* Carousel */}
       <Slider {...settings}>
-        {sellingData.map((item: Product, i) => {
+        {sellingData.map((item: Product, i: number) => {
           return (
             <BestSellingCard
               key={i}
