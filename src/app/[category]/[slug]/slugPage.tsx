@@ -3,19 +3,19 @@
 import SlugComponent from "@/components/slugComponents";
 import { Button } from "@/components/ui/button";
 import { FaHeart, FaMinus, FaPlus } from "react-icons/fa";
-import {  useAppSelector } from "@/app/store/hooks";
+import { useAppSelector } from "@/app/store/hooks";
 import { useState } from "react";
 import AddToCartToast from "@/components/addToCartToast";
 
 const SlugPage = ({ params }: { params: { slug: string } }) => {
   const product = useAppSelector((state) => state.product);
   const slug = product.filter((val) => val.slug === params.slug);
-  
+
   // Handle possible undefined values for images
   const [cartItem, setCartItem] = useState({
     id: slug[0].id,
     title: slug[0].title,
-    image: slug[0].image || [],  // Ensure it's always an array or fallback to an empty array
+    image: slug[0].image || [], // Ensure it's always an array or fallback to an empty array
     slug: slug[0].slug,
     price: slug[0].price,
     description: slug[0].description,
@@ -27,11 +27,11 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
   });
 
   return (
-      <div>
-        <div className="container px-5 py-24 mx-auto">
-          <div className="lg:w-4/5 mx-auto flex flex-wrap">
-            <SlugComponent image={slug[0].image || []} /> 
-            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+    <div>
+      <div className="container px-5 py-24 mx-auto">
+        <div className="lg:w-4/5 mx-auto flex flex-wrap">
+          <SlugComponent image={slug[0].image || []} />
+          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             {/* title */}
             <h2 className="scroll-m-20 text-sm font-semibold  text-gray-500 tracking-widest uppercase">
               {slug[0].category}
@@ -75,7 +75,7 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
               {slug[0].description}
             </p>
             <div className="flex mt-6 items-center mb-5">
-                {/* colors */}
+              {/* colors */}
               <div className="flex">
                 <span className="mr-1 scroll-m-20 text-base text-myBlackHead font-semibold tracking-tight">
                   {slug[0].color.map((item, i) => {
@@ -152,26 +152,28 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
               <div>
                 <span
                   className={`scroll-m-20 text-2xl font-semibold tracking-tight text-myBlackHead
-                ${
-                  cartItem?.discount! > 0 &&
-                  "line-through decoration-2 decoration-myMediumBlue/70 "
-                }`}
+    ${
+      cartItem?.discount && cartItem.discount > 0
+        ? "line-through decoration-2 decoration-myMediumBlue/70"
+        : ""
+    }
+  `}
                 >
                   ${cartItem.price * cartItem.qty}
                 </span>
 
                 {/* discounted price */}
-                {cartItem.discount! > 0 && (
+                {cartItem?.discount && cartItem.discount > 0 && (
                   <span className="ml-3 scroll-m-20 text-2xl font-semibold tracking-tight text-myBlackHead">
                     $
                     {(cartItem.price -
-                      (cartItem.price * cartItem.discount!) / 100) *
+                      (cartItem.price * cartItem.discount) / 100) *
                       cartItem.qty}
                   </span>
                 )}
               </div>
               {/* add to cart */}
-              <AddToCartToast cartItem={cartItem}/>
+              <AddToCartToast cartItem={cartItem} />
             </div>
             {/* buy now */}
             <Button className="group w-full mt-3 bg-myBlackHead text-myWhite hover:bg-transparent hover:text-myBlackHead rounded scroll-m-20 text-xs font-semibold tracking-tight">
