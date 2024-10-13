@@ -1,6 +1,10 @@
 "use client";
 import BestSellingCard from "@/components/bestSellingCard";
 import { useAppSelector } from "../store/hooks";
+import { Product } from "@/app/utils/types";
+import { StaticImageData } from "next/image";
+import BestSelling1 from "@/assets/image/BestSelling1.jpg";
+
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
   const product = useAppSelector((state) => state.product);
@@ -18,18 +22,18 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
       </div>
       {/* Category Page */}
       <div className="flex flex-wrap justify-center gap-5">
-        {topsData.map((item: any, i) => {
+        {topsData.map((item: Product, i) => {
           return (
             <BestSellingCard
               key={i}
-              src={item.image[0]}
+              src={(item.image && item.image.length > 0 ? item.image[0] : BestSelling1) as StaticImageData}
               alt={item.title}
               title={item.title}
               description={item.description}
               price={item.price}
               category={item.category}
               slug={item.slug}
-              discount={item.discount}
+              discount={item.discount ?? 0}
             />
           );
         })}

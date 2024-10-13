@@ -10,10 +10,12 @@ import AddToCartToast from "@/components/addToCartToast";
 const SlugPage = ({ params }: { params: { slug: string } }) => {
   const product = useAppSelector((state) => state.product);
   const slug = product.filter((val) => val.slug === params.slug);
+  
+  // Handle possible undefined values for images
   const [cartItem, setCartItem] = useState({
     id: slug[0].id,
     title: slug[0].title,
-    image: slug[0].image,
+    image: slug[0].image || [],  // Ensure it's always an array or fallback to an empty array
     slug: slug[0].slug,
     price: slug[0].price,
     description: slug[0].description,
@@ -21,15 +23,15 @@ const SlugPage = ({ params }: { params: { slug: string } }) => {
     size: slug[0].size[0],
     qty: slug[0].qty,
     discount: slug[0].discount,
-    color: slug[0].color[0]
+    color: slug[0].color[0],
   });
 
   return (
-    <div>
-      <div className="container px-5 py-24 mx-auto">
-        <div className="lg:w-4/5 mx-auto flex flex-wrap">
-          <SlugComponent image={slug[0].image} />
-          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+      <div>
+        <div className="container px-5 py-24 mx-auto">
+          <div className="lg:w-4/5 mx-auto flex flex-wrap">
+            <SlugComponent image={slug[0].image || []} /> 
+            <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             {/* title */}
             <h2 className="scroll-m-20 text-sm font-semibold  text-gray-500 tracking-widest uppercase">
               {slug[0].category}

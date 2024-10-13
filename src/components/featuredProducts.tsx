@@ -1,10 +1,13 @@
 "use client";
 
 import "slick-carousel/slick/slick.css";
+import BestSelling1 from "@/assets/image/BestSelling1.jpg";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import BestSellingCard from "@/components/bestSellingCard";
 import { useAppSelector } from "@/app/store/hooks";
+import { Product } from "@/app/utils/types";
+import { StaticImageData } from "next/image";
 
 const FeaturedProducts = () => {
   // Craousel settings
@@ -68,18 +71,18 @@ const FeaturedProducts = () => {
       </div>
       {/* Carousel */}
       <Slider {...settings}>
-        {sellingData.map((item: any, i) => {
+        {sellingData.map((item: Product, i) => {
           return (
             <BestSellingCard
               key={i}
-              src={item.image[0]}
+              src={(item.image && item.image.length > 0 ? item.image[0] : BestSelling1) as StaticImageData}
               alt={item.title}
               title={item.title}
               description={item.description}
               price={item.price}
               category={item.category}
               slug={item.slug}
-              discount={item.discount}
+              discount={item.discount ?? 0}
             />
           );
         })}

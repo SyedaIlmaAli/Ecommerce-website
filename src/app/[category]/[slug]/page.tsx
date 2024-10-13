@@ -1,6 +1,3 @@
-import SlugComponent from "@/components/slugComponents";
-import { Button } from "@/components/ui/button";
-import { FaHeart, FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
 import SlugPage from "./slugPage";
 
 const Slug = ({ params }: {params:{ slug: string}}) => {

@@ -2,6 +2,9 @@
 
 import { useAppSelector } from "@/app/store/hooks";
 import BestSellingCard from "./bestSellingCard";
+import { Product } from "@/app/utils/types";
+import { StaticImageData } from "next/image";
+import BestSelling1 from "@/assets/image/BestSelling1.jpg";
 
 const BestSelling = () => {
   const product = useAppSelector((state) => state.product);
@@ -20,18 +23,18 @@ const BestSelling = () => {
       </div>
       {/* Best Selling Products */}
       <div className="flex flex-wrap justify-center gap-5">
-        {sellingData.map((item:any, i) => {
+      {sellingData.map((item: Product, i) => {
           return (
             <BestSellingCard
-            key={i}
-              src={item.image[0]}
+              key={i}
+              src={(item.image && item.image.length > 0 ? item.image[0] : BestSelling1) as StaticImageData}
               alt={item.title}
               title={item.title}
-              description={item.desc}
+              description={item.description}
               price={item.price}
               category={item.category}
               slug={item.slug}
-              discount={item.discount}
+              discount={item.discount ?? 0}
             />
           );
         })}
