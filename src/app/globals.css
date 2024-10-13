@@ -2,26 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.custom-img{
+  background-image: url('../assets/image/HeroImg.jpg');
+  object-fit: cover;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.promo-1{
+  background-image: url('../assets/image/promoImg.jpg');
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.promo-2{
+  background-image: url('../assets/image/promoImg2.jpg');
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.myDiscount{
+  transform: rotate(-90deg) translate(0, -69px);
+  transform-origin: 100% 0;
 }
