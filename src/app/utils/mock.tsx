@@ -49,7 +49,7 @@ export const products: Product[] = [
     category: "tops",
     size: ["XS", "S", "M", "L", "XL"],
     color: ["White", "Gray", "Black"],
-    qty: 50,
+    qty: 1,
     discount: 15
   },
   {
